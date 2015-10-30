@@ -1,0 +1,53 @@
+# Readme
+
+Know how to use `MOV`, `LSL`, and `LSR` will be sufficient to write this
+program.
+
+1. r1: left shift 24 bits to erase the bits beyond [0, 7], and then right shift 24 bits back to the right-most position.
+2. r2: left shift 16 bits to erase the bits beyond [0, 15], and then right shift 24 bits back to the right-most position.
+3. r3: left shift 1 bit to erase the bits beyond [0, 30], and then right shift 19 bits back to the right-most position.
+
+# Code
+
+```arm
+@Homework 3
+
+    .section .text
+    .global main
+    .type main, %function
+
+main:
+    MOV r0, #202 @assign a number
+
+    @r1
+    MOV r1, r0, LSL #24
+    MOV r1, r1, LSR #24
+
+    @r2
+    MOV r2, r0, LSL #16
+    MOV r2, r2, LSR #24
+
+    @r3
+    MOV r3, r0, LSL #1
+    MOV r3, r3, LSR #19
+
+    nop
+    .end
+```
+
+# ​Execution
+
+程式基本上是把r0的值經過2次shift後，分別丟到r1-r3。
+
+# 編譯的方法
+
+利用./arm-elf-gcc hw3.s -g -o hw3.exe進行編譯
+
+程式執行環境為Ubuntu 15.10 64-bit，利用./arm-elf-insight執行，並觀察register的數值，或是直接更改r0數值。
+
+# Notes
+
+https://github.com/henrybear327/Tutorial/blob/master/Assembly/gcin/readme.md
+
+我們發現，透過更改系統的輸入法，可以解決64bit系統沒辦法直接改memory和 register數值的問題。
+

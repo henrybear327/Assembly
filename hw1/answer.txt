@@ -1,0 +1,10 @@
+A1:
+1. 先安裝一個VMware Workstation 12, 並且安裝Linux Mint 17.2作為作業系統。
+2. 開啟terminal 並且 cd 到 Desktop，用tar -zxvf 去解壓縮老師編譯好的壓縮檔。 (嘗試自己編譯多次均失敗)
+3. cd 到 con/bin資料夾
+4. 使用./arm-elf-as hw1.s -o hw1.o 去將.s檔案編譯成object code
+5. 使用./arm-elf-gcc hw1.o -o hw1.exe去生成最後的執行檔案
+6. 使用./arm-elf-run hw1.exe去執行，確認編譯的檔案正常，得到number = 100
+
+A2: 
+hw1.o是從assembly language直接翻譯而成的機器碼，而hw1.exe是將所有所需的.o檔連結之後，變成可以被執行的持行檔。
