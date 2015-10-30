@@ -13,17 +13,15 @@
 程式執行環境為Ubuntu 15.10 64-bit，利用 `./arm-elf-insight` 執行，以方便直接更改r0數值
 並觀察register的數值。
 
-我使用的測試資料
+# 測試資料
 
 1. r0: `0xabcdef` ans: `0x2a, 0xcd, 0xef`
 2. r0: `0x40101`  ans: `0x1, 0x1, 0x1`
 
-# 輸入法
+# 解決64bit的insight bug --> 改變輸入法
 
-https://github.com/henrybear327/Tutorial/blob/master/Assembly/gcin/readme.md
-
-我們發現，透過更改系統的輸入法，可以解決64bit系統沒辦法直接改 memory 和
-register 數值的問題。所以我們寫了一個教學，幫助大家 :)
+我們發現，透過更改系統的輸入法，可以解決64bit的insight沒辦法直接改 memory 和
+register 數值的問題。所以我們寫了一個[教學](https://github.com/henrybear327/Tutorial/blob/master/Assembly/gcin/readme.md)，幫助大家 :)
 
 # Code
 
