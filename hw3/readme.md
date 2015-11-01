@@ -25,7 +25,7 @@ register 數值的問題。所以我們寫了一個[教學](https://github.com/h
 
 # Code
 
-```arm
+```as
 @Homework 3
 
     .section .text
