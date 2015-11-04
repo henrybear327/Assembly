@@ -1,8 +1,5 @@
 # README
 
-403410033
-資工二 曾俊宏
-
 這個文章是使用 `markdown` 所撰寫，可以使用 atom 編輯器 preview markdown, 或是到[這裡](https://github.com/henrybear327/Assembly/blob/master/hw4/README.md)觀看。
 
 # 程式功能
