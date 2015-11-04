@@ -34,7 +34,7 @@
 
 # Source code
 
-```arm
+```as
 .section .text
 .global main
 .type main,%function
