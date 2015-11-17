@@ -29,4 +29,4 @@ D 2 * 2 matrix (= A * B + C )
 
 # Implementation
 
-Simply brute force the solution. Too busy study
+Simply brute force the solution.
