@@ -1,6 +1,6 @@
 # Sample input and sample output
 
-A 2 \* 3 matrix
+A: 2 \* 3 matrix
 
 ```
 +---+---+---+
@@ -9,7 +9,7 @@ A 2 \* 3 matrix
 +---+---+---+
 ```
 
-B 3 \* 2 matrix
+B: 3 \* 2 matrix
 
 ```
 +----+----+
@@ -19,7 +19,7 @@ B 3 \* 2 matrix
 +----+----+
 ```
 
-C 2 \* 2 matrix
+C: 2 \* 2 matrix
 
 ```
 +----+----+
@@ -28,7 +28,7 @@ C 2 \* 2 matrix
 +----+----+
 ```
 
-D 2 \* 2 matrix (D = A \* B + C )
+D: 2 \* 2 matrix (D = A \* B + C )
 
 ```
 +----+----+
@@ -39,4 +39,11 @@ D 2 \* 2 matrix (D = A \* B + C )
 
 # Implementation
 
-Simply brute force the solution.
+1. Simply brute force the process.
+
+2. Basically, four matrices are declared as words in the text section. The variable names are the same as shown in the tables above.
+
+3. During calculation:
+    * r0 -> stores the memory of .matrix
+    * r1 ~ r7 -> stores the value to be operated
+    * r8 stores the final result for D[i][j]
