@@ -222,5 +222,9 @@ main:
 	add r0, r0, #16
 	str r8, [r0]
 
+	@ store the memory address of D[0][0] to r1
+	ldr r1, .matrix
+	add r1, r1, #64
+
 	nop
 	.end
