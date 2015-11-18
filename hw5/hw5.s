@@ -75,6 +75,7 @@ d2:
 	.word d2
 
 main:
+	/*==================================================*/
 	@ Kind of get the pointer to point to the start of the requested memory address
 	@ r0 is always the pointer to the memory address in this code
 	ldr r0, .matrix
@@ -108,6 +109,116 @@ main:
 	add r8, r8, r7
 
 	@ get the address of d[0][0]
+	add r0, r0, #16
+	str r8, [r0]
+
+	/*==================================================*/
+	@ r0 is always the pointer to the memory address in this code
+	ldr r0, .matrix
+
+	@ calculate answer for D[0][1]
+
+	@ Load row 0 from A to r1-r3
+	ldmia r0, {r1 - r3}
+
+	@ Load column 1 from B to r4-r6
+	add r0, r0, #36
+	ldmia r0, {r4 - r6}
+
+	@ Load C[0][1] to r7
+	add r0, r0, #16
+	ldr r7, [r0]
+
+	/*
+	Multiple A row 0 with B column 1
+	The multiplied temporary values are stored in r4 - r6.
+	The final result is stored in r8
+	*/
+
+	@ c[0][1] = r1 * r4 + r2 * r5 + r3 * r6
+	mul r4, r1, r4
+	mul r5, r2, r5
+	mul r6, r3, r6
+	add r8, r4, r5
+	add r8, r8, r6
+
+	add r8, r8, r7
+
+	@ get the address of d[0][1]
+	add r0, r0, #16
+	str r8, [r0]
+
+	/*==================================================*/
+	@ r0 is always the pointer to the memory address in this code
+	ldr r0, .matrix
+
+	@ calculate answer for D[1][0]
+
+	@ Load row 1 from A to r1-r3
+	add r0, r0, #12
+	ldmia r0, {r1 - r3}
+
+	@ Load column 0 from B to r4-r6
+	add r0, r0, #12
+	ldmia r0, {r4 - r6}
+
+	@ Load C[1][0] to r7
+	add r0, r0, #32
+	ldr r7, [r0]
+
+	/*
+	Multiple A row 0 with B column 0
+	The multiplied temporary values are stored in r4 - r6.
+	The final result is stored in r8
+	*/
+
+	@ c[1][0] = r1 * r4 + r2 * r5 + r3 * r6
+	mul r4, r1, r4
+	mul r5, r2, r5
+	mul r6, r3, r6
+	add r8, r4, r5
+	add r8, r8, r6
+
+	add r8, r8, r7
+
+	@ get the address of d[1][0]
+	add r0, r0, #16
+	str r8, [r0]
+
+	/*==================================================*/
+	@ r0 is always the pointer to the memory address in this code
+	ldr r0, .matrix
+
+	@ calculate answer for D[1][1]
+
+	@ Load row 1 from A to r1-r3
+	add r0, r0, #12
+	ldmia r0, {r1 - r3}
+
+	@ Load column 1 from B to r4-r6
+	add r0, r0, #24
+	ldmia r0, {r4 - r6}
+
+	@ Load C[1][1] to r7
+	add r0, r0, #24
+	ldr r7, [r0]
+
+	/*
+	Multiple A row 0 with B column 0
+	The multiplied temporary values are stored in r4 - r6.
+	The final result is stored in r8
+	*/
+
+	@ c[1][1] = r1 * r4 + r2 * r5 + r3 * r6
+	mul r4, r1, r4
+	mul r5, r2, r5
+	mul r6, r3, r6
+	add r8, r4, r5
+	add r8, r8, r6
+
+	add r8, r8, r7
+
+	@ get the address of d[1][1]
 	add r0, r0, #16
 	str r8, [r0]
 
