@@ -34,7 +34,7 @@ D: 2 \* 2 matrix (D = A \* B + C, which is the answer matrix)
 +-----+-----+
 | 71  | 78  | (d1)
 | 154 | 170 | (d2)
-+----+----+
++-----+-----+
 ```
 
 # Implementation
