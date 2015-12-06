@@ -1,6 +1,6 @@
 # 程式內容
 
-利用bubblesort特性,將大的數字一直換到array最後面
+利用bubble sort特性,將大的數字一直換到array最後面
 
 # 編譯
 
