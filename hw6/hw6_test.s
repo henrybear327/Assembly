@@ -5,7 +5,7 @@
 	.align 4
 
 /* --- Orig array --- */
-	.size a1, 20
+	.size orig, 20
 orig:
 	.word 1
 	.word 3
@@ -14,7 +14,7 @@ orig:
 	.word 4
 
 /* --- Ans array --- */
-	.size a1, 20
+	.size ans, 20
 ans:
 	.word 1
 	.word 3
@@ -40,6 +40,7 @@ main:
 
 	/* --- begin of your function --- */
 	LDR r0, .answer
+	LDR r8, .answer
 	MOV r1, #5 /* array size */
 	STR r0, [sp, #-4]!	/* push array address */
 	STR r1, [sp, #-4]!	/* push array size */
