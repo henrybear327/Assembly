@@ -19,7 +19,7 @@ result:
 NumSort:
 	/* function start */
 	MOV ip, sp @ ip is now the position before the stack pointer moved
-	STMFD sp!, {r0-r10, fp, ip, lr, pc} @ store the r0-r15 status 
+	STMFD sp!, {r2-r10, fp, ip, lr, pc} @ store the r0-r15 status 
 	SUB fp, ip, #4 
 
 	/*
@@ -93,5 +93,5 @@ TERMINATE:
 	MOV r0, r6
 	nop
 	/* function exit */
-	LDMEA fp, {r1-r10, fp, sp, pc}
+	LDMEA fp, {r2-r10, fp, sp, pc}
 	.end
