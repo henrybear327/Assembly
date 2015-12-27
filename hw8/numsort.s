@@ -43,7 +43,6 @@ NumSort:
 	/*
 	r0 is now the size of the array
 	r1 is now the pointer to the passed-in array
-	r12 is now the starting point of the original r0-r15
 	*/
 
 	/* --- begin your function --- */
@@ -52,65 +51,76 @@ NumSort:
 	/*
 	for(int i = 0; i < r5; i++)
 		for(int j = i + 1; j < r5; j++)
-			if(array[i] > array[j]) //r0, r1
+			if(array[i] > array[j])
 				swap(array[i], array[j]);
 	*/
 
 	/*
-	i r0
-	j r1
-	limit r4
-	array[i] r2
-	array[j] r3
-	r5 array size -> r0
-	r6 array addr. -> r1
+	r0 orig_size
+	r1 orig_array
+
+	r2 i
+	r3 j
+	r4 size_limit
+
+	r5 orig_array[i]
+	r6 orig_array[j]
+	r7 tmp
+
+	r9 result array
 	*/
-	MOV r5, r0
-	MOV r6, r1
 
-	MOV r0, #0 		@init i
-	MOV r4, #0
-	MOV r7, #4
-	MUL r4, r5, r7
-	SUB r4, r4, #4
+	MOV r2, #4
+	MUL r4, r2, r0 @ set size_limit
+	MOV r2, #0 @ init i = 0
 
-LOOP_i:
-	MOV r2, #0
-	LDR r2, [r6, r0] @get array[i]
+	/* Copy orig_array to result array*/
+	/*
+	for(int i = 0; i < size_limit;i++)
+		result[i] = orig_array[i];
+	*/
+COPY:
+	CMP r2, r4
+	BEQ END_COPY
+	LDR r7, [r1, r2]
+	STR r7, [r9, r2]
+	ADD r2, #4
+	B COPY
 
-	ADD r1, r0, #4
-	ADD r7, r4, #4
-	CMP r1, r7
-	BNE LOOP_j
+END_COPY:
+	MOV r1, r9 @ Do all operations on result array!
+	MOV r2, #0 @ init i = 0
 
-BACK_TO_i:
-	CMP r0, r4
-	BEQ TERMINATE @i == r5
-	ADD r0, r0, #4 @ i++
-	B LOOP_i
+I_LOOP:
+	CMP r2, r4 @ i < size_limit
+	BEQ TERMINATE
 
-LOOP_j:
-BACK_TO_j:
-	LDR r3, [r6, r1] @get array[j]
-	CMP r2, r3;
-	MOVPL r8, r2 @swap
-	MOVPL r2, r3
-	MOVPL r3, r8
-	STR r2, [r6, r0] @store it back
-	STR r3, [r6, r1]
+	MOV r3, r2
+	ADD r3, #4 @ j = i + 1
+J_LOOP:
+	CMP r3, r4 @ j < size_limit
+	BEQ END_J
 
-	CMP r1, r4
-	BEQ BACK_TO_i
-	ADD r1, r1, #4
+	@ if(orig_array[i] > orig_array[j])
+	@ 	swap(orig_array[i], orig_array[j]);
+	LDR r5, [r1, r2]
+	LDR r6, [r1, r3]
+	CMP r5, r6
+	MOVPL r7, r5
+	MOVPL r5, r6
+	MOVPL r6, r7
+	STRPL r5, [r1, r2]
+	STRPL r6, [r1, r3]
 
-	B BACK_TO_j
-
+	ADD r3, #4
+	B J_LOOP
+END_J:
+	ADD r2, #4
+	B I_LOOP
 
 TERMINATE:
 	/* --- end of your function --- */
-	MOV r0, r6
-	nop
-
+	MOV r0, r1
 	/* function exit */
 	LDMEA fp, {r1-r10, fp, sp, pc}
 	.end

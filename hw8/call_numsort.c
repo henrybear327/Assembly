@@ -24,7 +24,6 @@ int *NumSort(int size, int array[])
 int main()
 {
     int n;
-
     scanf("%d", &n);
 
     int array[n];
