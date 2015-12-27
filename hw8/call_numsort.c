@@ -43,6 +43,12 @@ int main()
         printf("%c", string[i]);
     printf("\n");
 
+    int error_code = FileOutput(string);
+    if(error_code == 0)
+        printf("File created successfully\n");
+    else
+        printf("File creation failed. Error code %d\n", error_code);
+
     for(int i = 0; i < n; i++)
         printf("%d%c", result[i], i == n - 1 ? '\n' : ' ');
 
