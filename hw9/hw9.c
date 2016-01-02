@@ -8,7 +8,7 @@ int main()
     // freopen("sample_data.txt", "r", stdin); // SIZE needs to be 4
 
     freopen("data.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("output_non_SIMD.txt", "w", stdout);
 
     double inp[SIZE][SIZE];
     for (int i = 0; i < SIZE; i++) {
