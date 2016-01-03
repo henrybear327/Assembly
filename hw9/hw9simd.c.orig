@@ -17,7 +17,7 @@ int main() {
   freopen("data.txt", "r", stdin);
   freopen("output.txt", "w", stdout);
 
-  double inp[SIZE][SIZE] __attribute__((aligned(32))); // 8-byte = 32-bit
+  double inp[SIZE][SIZE] __attribute__((aligned(64))); // 8-byte = 64-bit
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
       scanf("%lf", &inp[i][j]);
@@ -28,24 +28,25 @@ int main() {
   memset(ans, 0, sizeof(ans));
 
   for (int i = 0; i < SIZE; i++) { // first term counter
-    double sum[4];
+    double sum[2] __attribute__((aligned(64)));
     memset(sum, 0, sizeof(sum));
     __m128d *mm_sum = (__m128d *)sum;
     for (int j = 0; j < SIZE; j++) { // second term counter
       __m128d *row1 = (__m128d *)inp[i];
       __m128d *row2 = (__m128d *)inp[j];
 
-      for (int k = 0; k < SIZE / 4; k++) { // calculate the dot product
-        double tmp[4];
+      for (int k = 0; k < SIZE / 2; k++) { // calculate the dot product
+        double tmp[2] __attribute__((aligned(64)));
         memset(tmp, 0, sizeof(tmp));
         __m128d *mm_tmp = (__m128d *)tmp;
 
         *mm_tmp = _mm_mul_pd(row1[k], row2[k]);
 
         *mm_sum = _mm_add_pd(*mm_tmp, *mm_sum);
+        // printf("%d %d %d: %f %f\n", i, j, k, sum[0], sum[1]);
       }
     }
-    printf("%f\n", sum[0] + sum[1] + sum[2] + sum[3]);
+    printf("%.3f\n", sum[0] + sum[1]);
   }
 
   /*

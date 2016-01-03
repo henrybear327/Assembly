@@ -32,7 +32,7 @@ int main()
                 // printf("%f\n", ans[i]);
             }
         }
-        printf("%f\n", ans[i]);
+        printf("%.3f\n", ans[i]);
     }
 
     return 0;
