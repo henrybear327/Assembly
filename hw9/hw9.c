@@ -3,6 +3,11 @@
 
 #define SIZE 200
 
+/*
+lang-format -i -style=LLVM hw9.c  && astyle --style=linux hw9.c
+&& clang -Wall -Wextra  -o hw9.o hw9.c
+*/
+
 int main()
 {
     // freopen("sample_data.txt", "r", stdin); // SIZE needs to be 4

@@ -1,20 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SIZE 200
-
+#include "mmintrin.h" // Definitions and Declarations for use with compiler intrinsics
+#include "xmmintrin.h" // SSE
+#include "emmintrin.h" // SSE2
 /*
-lang-format -i -style=LLVM hw9.c  && astyle --style=linux hw9.c
-&& clang -Wall -Wextra  -o hw9.o hw9.c
+__m128d _mm_mul_pd (__m128d a, __m128d b)
+__m128d _mm_add_pd (__m128d a, __m128d b)
 */
+
+#define SIZE 200
 
 int main() {
   // freopen("sample_data.txt", "r", stdin); // SIZE needs to be 4
 
   freopen("data.txt", "r", stdin);
-  freopen("output_non_SIMD.txt", "w", stdout);
+  freopen("output.txt", "w", stdout);
 
-  double inp[SIZE][SIZE];
+  double inp[SIZE][SIZE] __attribute__((aligned(64)));
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
       scanf("%lf", &inp[i][j]);
