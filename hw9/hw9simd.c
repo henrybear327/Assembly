@@ -9,6 +9,12 @@ __m128d _mm_mul_pd (__m128d a, __m128d b)
 __m128d _mm_add_pd (__m128d a, __m128d b)
 */
 
+/*
+clang-format -i -style=LLVM hw9simd.c  && astyle --style=linux hw9simd.c
+&& gcc -Wall -Wextra -msse -msse2 -ftree-vectorize -std=c99 -o hw9simd.o
+hw9simd.c
+*/
+
 #define SIZE 200
 
 int main()
@@ -24,9 +30,6 @@ int main()
             scanf("%lf", &inp[i][j]);
         }
     }
-
-    double ans[SIZE];
-    memset(ans, 0, sizeof(ans));
 
     for (int i = 0; i < SIZE; i++) { // first term counter
         double sum[2] __attribute__((aligned(64)));
@@ -47,20 +50,10 @@ int main()
                 // printf("%d %d %d: %f %f\n", i, j, k, sum[0], sum[1]);
             }
         }
+
+        // output to only 3 dicimal digits to avoid rounding errors
         printf("%.3f\n", sum[0] + sum[1]);
     }
-
-    /*
-    for (int i = 0; i < SIZE; i++) {     // first term counter
-        for (int j = 0; j < SIZE; j++) {   // second term counter
-            for (int k = 0; k < SIZE; k++) { // calculate the dot product
-                ans[i] += inp[i][k] * inp[j][k];
-                // printf("%f\n", ans[i]);
-            }
-        }
-        printf("%f\n", ans[i]);
-    }
-    */
 
     return 0;
 }
