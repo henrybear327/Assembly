@@ -32,7 +32,7 @@ int main()
                 // printf("%f\n", ans[i]);
             }
         }
-        
+
         // output to only 3 dicimal digits to avoid rounding errors
         printf("%.3f\n", ans[i]);
     }
