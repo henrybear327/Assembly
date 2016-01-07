@@ -1,16 +1,27 @@
-# CPU
+# 執行程式所使用的CPU
 
-`Intel i5-5257U`, with support of `...`
+1. `Intel i5-5257U`, 指令及擴充有 `SSE4.1/4.2, AVX 2.0`
+2. 系上的工作站
 
 # Makefile
 
-## Parameters
+## 可以拿來make的參數
 
-* `all`
-* `non_simd`
-* `simd`
-* `clean`
+* `all`：編譯用SIMD和沒用SIMD的兩個版本，並進行執行和計時
+* `non_simd`：僅編譯沒用SIMD的版本
+* `simd`：僅編譯用SIMD的版本
+* `clean`：將`.o`檔案刪除
 
-# Runtime
+# 執行狀況
 
-Slower on `csie0.cs.ccu.edu.tw` but about 0.08s faster on my machine
+很奇怪的，在工作站 `csie0.cs.ccu.edu.tw`執行時我的SIMD版本竟然比一般版本慢了10%左右。
+
+在我的電腦上，大概是快10%（0.045s vs 0.041s)。
+
+# 程式內容
+
+測資產生器跟一般版本的code都還滿好寫的，只是double的運算，真的會有不少誤差，所以我只取了小數下三位當作答案而已。
+
+SIMD版本，我只用了`__m128d _mm_mul_pd (__m128d a, __m128d b)` 和 `__m128d _mm_add_pd (__m128d a, __m128d b)` 而已。只是剛開始我把double的size算錯了，所以答案一直算不出來XD
+
+內積就是先對任兩row的每個element兩個兩個一組，先做乘法，然後再做加法。整個row做完之後，就把sum陣列的答案全部加總起來，並且輸出到螢幕上！（看code比較清楚，有點難用文字說明。）
